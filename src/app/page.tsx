@@ -1,4 +1,5 @@
 import Card from "@/components/Card";
+import Sidebar from '@/components/Sidebar';
 import { FaPeopleGroup } from "react-icons/fa6";
 import { FaGears } from "react-icons/fa6";
 import { FaBoxesPacking } from "react-icons/fa6";
