@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button"
+import Actions from '@/components/Actions';
+
 import {
     Table,
     TableBody,
@@ -27,13 +28,11 @@ export default function Colaboradores() {
           name: "Aldo",
           available_time: "200",
         },
-      ]
-    return (<main>
+    ]
+    return (<main className="min-h-screen p-6">
             <h1 className="text-4xl"> Colaboradores </h1>
             <section className="pt-4 px-2">
-                <div className="p-3 flex justify-end">
-                    <Button>Adicionar colaborador</Button>
-                </div>
+                <Actions />
                 <Table className="z-0">
                     <TableCaption>Lista dos colaboradores da empresa.</TableCaption>
                     <TableHeader>

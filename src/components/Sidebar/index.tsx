@@ -23,7 +23,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed h-full inset-y-0 left-0 w-64 bg-white shadow-md transform ${
+        className={`fixed h-full inset-y-0 left-0 w-72 z-50 bg-white shadow-md transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out md:relative md:translate-x-0`}
       >
@@ -40,22 +40,22 @@ const Sidebar = () => {
             </a>
           </div>
           <div className="flex flex-col p-4 space-y-4 mt-10">
-            <Link href="/producao" className="text-gray-800 hover:text-blue-500">
+            <Link href="/producao" onClick={toggleSidebar} className="text-gray-800 hover:text-blue-500">
               Produção
             </Link>
-            <Link href="/colaboradores" className="text-gray-800 hover:text-blue-500">
+            <Link href="/colaboradores" onClick={toggleSidebar} className="text-gray-800 hover:text-blue-500">
               Colaboradores
             </Link>
-            <Link href="/maquinas" className="text-gray-800 hover:text-blue-500">
+            <Link href="/maquinas"  onClick={toggleSidebar} className="text-gray-800 hover:text-blue-500">
               Máquinas
             </Link>
-            <Link href="/processos" className="text-gray-800 hover:text-blue-500">
+            <Link href="/processos" onClick={toggleSidebar} className="text-gray-800 hover:text-blue-500">
               Processos
             </Link>
-            <Link href="/produtos" className="text-gray-800 hover:text-blue-500">
+            <Link href="/produtos" onClick={toggleSidebar} className="text-gray-800 hover:text-blue-500">
               Produtos
             </Link>
-            <Link href="/relatorio" className="text-gray-800 hover:text-blue-500">
+            <Link href="/relatorio" onClick={toggleSidebar} className="text-gray-800 hover:text-blue-500">
               Relatório
             </Link>
           </div>
