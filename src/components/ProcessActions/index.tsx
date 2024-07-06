@@ -12,12 +12,13 @@ export default function ProcessActions() {
     
         <div className="p-3 flex justify-between">
             <div className="product">
-                <label htmlFor="product" >Produto</label>
-                <select>
-                    <option>a</option>
-                    <option>b</option>
-                    <option>c</option>
-                    <option>d</option>
+                <label htmlFor="product" >Produto:</label>
+                <select className="p-2 mx-2 border border-gray-300 rounded">
+                    <option></option>
+                    <option>Produto A</option>
+                    <option>Produto b</option>
+                    <option>Produto c</option>
+                    <option>Produto d</option>
                 </select>
             </div>
             <Button onClick={navigateToCreate}>Adicionar processo</Button>

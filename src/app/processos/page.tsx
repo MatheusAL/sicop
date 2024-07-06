@@ -15,28 +15,38 @@ export default function Processos() {
     const machines = [
         {
           id: "INV001",
-          name: "Overlock",
-          description: "process description"
+          ref: "INV001",
+          machine: "Overlock",
+          description: "process description",
+          time: "10"
         },
         {
           id: "INV001",
-          name: "Reta",
-          description: "process description"
+          ref: "INV001",
+          machine: "Reta",
+          description: "process description",
+          time: "10"
         },
         {
           id: "INV001",
-          name: "Colarete",
-          description: "process description"
+          ref: "INV001",
+          machine: "Colarete",
+          description: "process description",
+          time: "10"
         },
         {
             id: "INV001",
-            name: "Refiladeira",
-            description: "process description"
+            ref: "INV001",
+            machine: "Refiladeira",
+            description: "process description",
+            time: "10"
         },
         {
             id: "INV001",
-            name: "Botoneira",
-            description: "process description"
+            ref: "INV001",
+            machine: "Botoneira",
+            description: "process description",
+            time: "10"
         },
     ]
     return (<main className="min-h-screen p-6">
@@ -48,16 +58,20 @@ export default function Processos() {
                     <TableHeader>
                     <TableRow>
                         <TableHead className="w-[100px] text-center">Id</TableHead>
-                        <TableHead className="text-center">Nome</TableHead>
+                        <TableHead className="text-center">Referência</TableHead>
+                        <TableHead className="text-center">Máquina</TableHead>
                         <TableHead className="text-center">Descrição</TableHead>
+                        <TableHead className="text-center">Tempo(s)</TableHead>
                     </TableRow>
                     </TableHeader>
                     <TableBody>
                     {machines.map((machine) => (
                         <TableRow key={machine.id}>
                             <TableCell className="font-medium text-center">{machine.id}</TableCell>
-                            <TableCell className="font-medium text-center">{machine.name}</TableCell>
+                            <TableCell className="font-medium text-center">{machine.ref}</TableCell>
+                            <TableCell className="font-medium text-center">{machine.machine}</TableCell>
                             <TableCell className="font-medium text-center">{machine.description}</TableCell>
+                            <TableCell className="font-medium text-center">{machine.time}</TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
