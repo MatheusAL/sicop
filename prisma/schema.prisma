@@ -24,11 +24,11 @@ model User {
   password      String
   // Optional for WebAuthn support
   Authenticator Authenticator[]
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model Account {
   userId            String
   type              String
@@ -41,33 +41,33 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@id([provider, providerAccountId])
 }
- 
+
 model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@id([identifier, token])
 }
- 
+
 // Optional for WebAuthn support
 model Authenticator {
   credentialID         String  @unique
@@ -78,51 +78,54 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@id([userId, credentialID])
 }
 
 model Colaborador {
-  id             Int          @id @default(autoincrement())
-  nome           String
+  id              Int        @id @default(autoincrement())
+  nome            String
   tempoDisponivel Int
-  Producoes      Producao[]
+  Producoes       Producao[]
 }
 
 model Maquina {
-  id          Int          @id @default(autoincrement())
-  nome        String
-  descricao   String
-  Processos   Processo[]
+  id        Int        @id @default(autoincrement())
+  nome      String
+  descricao String
+  Processos Processo[]
 }
 
 model Produto {
-  id          Int          @id @default(autoincrement())
-  nome        String
-  descricao   String
-  Producoes   Producao[]
+  id        Int        @id @default(autoincrement())
+  nome      String
+  descricao String
+  Producoes Producao[]
+  Processo  Processo[]
 }
 
 model Processo {
-  id          Int          @id @default(autoincrement())
-  referencia  String
-  maquinaId   Int
-  descricao   String
-  tempo       Int
-  maquina     Maquina      @relation(fields: [maquinaId], references: [id])
-  Producoes   Producao[]
+  id         Int        @id @default(autoincrement())
+  referencia String
+  maquinaId  Int
+  descricao  String
+  tempo      Int
+  produtoId  Int
+  maquina    Maquina    @relation(fields: [maquinaId], references: [id])
+  produto    Produto    @relation(fields: [produtoId], references: [id])
+  Producoes  Producao[]
 }
 
 model Producao {
-  id           Int          @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   colaboradorId Int
-  produtoId    Int
-  processoId   Int
-  data         DateTime
-  tempo        Int
-  colaborador  Colaborador  @relation(fields: [colaboradorId], references: [id])
-  produto      Produto      @relation(fields: [produtoId], references: [id])
-  processo     Processo     @relation(fields: [processoId], references: [id])
+  produtoId     Int
+  processoId    Int
+  data          DateTime
+  tempo         Int
+  colaborador   Colaborador @relation(fields: [colaboradorId], references: [id])
+  produto       Produto     @relation(fields: [produtoId], references: [id])
+  processo      Processo    @relation(fields: [processoId], references: [id])
 }
