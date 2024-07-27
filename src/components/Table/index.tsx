@@ -13,13 +13,14 @@ import {
 export interface CustomTableProps {
     data: Array<any>;
     headers: Array<String>;
+    tableDescription: String;
 }
 
-export default function CustomTable({data, headers}: CustomTableProps){
+export default function CustomTable({data, headers, tableDescription}: CustomTableProps){
     
     return (
         <Table className="z-0">
-        <TableCaption>Lista das máquinas utilizadas na empresa.</TableCaption>
+        <TableCaption>{tableDescription}</TableCaption>
         <TableHeader>
         <TableRow>
             {headers.map((header, index) => (

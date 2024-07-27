@@ -22,7 +22,7 @@ export default function Machines() {
             <section className="pt-4 px-2">
                 <MachineActions />
                 
-                {data && <CustomTable data={data.data} headers={headers}/>}
+                {data && <CustomTable data={data.data} headers={headers} tableDescription={'Lista das máquinas utilizadas na empresa.'}/>}
             </section>
         </>
     )
