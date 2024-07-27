@@ -1,6 +1,12 @@
 import Link from "next/link";
+import { IconType } from "react-icons";
 
-export default function Card({ name, icon, pageLink}) {
+export interface CardProps {
+    name: string,
+    icon: React.ReactNode,
+    pageLink: string
+};
+export default function Card({ name , icon, pageLink}:CardProps) {
     return (
         <Link href={pageLink}>
             <div

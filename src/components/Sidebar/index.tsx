@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
+import Logout from '@/components/Logout';
+import { useSession } from 'next-auth/react';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +12,7 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-
+  const session = useSession();
   return (
     <div className="relative">
       {/* Hamburger Icon */}
@@ -27,7 +29,7 @@ const Sidebar = () => {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out md:relative md:translate-x-0`}
       >
-        <div className="relative h-full">
+        <div className="relative h-full flex flex-col">
           <button
             onClick={toggleSidebar}
             className="absolute top-2 right-2 p-2 text-gray-600 focus:outline-none md:hidden"
@@ -59,6 +61,13 @@ const Sidebar = () => {
               Relatório
             </Link>
           </div>
+          <div className="border-t mt-auto border-gray-700 p-4">
+            <div className="flex items-center justify-between space-x-4">
+                {session && <p className="font-medium">{session.data?.user?.name}</p>}
+                <Logout/>
+            </div>
+          </div>
+          
         </div>
       </div>
     </div>

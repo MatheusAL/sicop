@@ -1,4 +1,5 @@
 import Actions from '@/components/Actions';
+import { getUsers } from '@/server/actions';
 
 import {
     Table,
