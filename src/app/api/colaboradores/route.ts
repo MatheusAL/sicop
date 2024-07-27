@@ -19,7 +19,7 @@ export async function POST(request: Request) {
         const newColaborador = await prisma.colaborador.create({
           data: {
             nome: data.nome,
-            tempoDisponivel: data.tempo
+            tempoDisponivel: parseInt(data.tempoDisponivel)
           },
         });
         return new Response(JSON.stringify({ data: newColaborador }), {
