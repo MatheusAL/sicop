@@ -21,6 +21,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  password      String
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
@@ -81,4 +82,47 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@id([userId, credentialID])
+}
+
+model Colaborador {
+  id             Int          @id @default(autoincrement())
+  nome           String
+  tempoDisponivel Int
+  Producoes      Producao[]
+}
+
+model Maquina {
+  id          Int          @id @default(autoincrement())
+  nome        String
+  descricao   String
+  Processos   Processo[]
+}
+
+model Produto {
+  id          Int          @id @default(autoincrement())
+  nome        String
+  descricao   String
+  Producoes   Producao[]
+}
+
+model Processo {
+  id          Int          @id @default(autoincrement())
+  referencia  String
+  maquinaId   Int
+  descricao   String
+  tempo       Int
+  maquina     Maquina      @relation(fields: [maquinaId], references: [id])
+  Producoes   Producao[]
+}
+
+model Producao {
+  id           Int          @id @default(autoincrement())
+  colaboradorId Int
+  produtoId    Int
+  processoId   Int
+  data         DateTime
+  tempo        Int
+  colaborador  Colaborador  @relation(fields: [colaboradorId], references: [id])
+  produto      Produto      @relation(fields: [produtoId], references: [id])
+  processo     Processo     @relation(fields: [processoId], references: [id])
 }

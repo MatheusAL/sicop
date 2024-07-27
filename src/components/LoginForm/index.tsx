@@ -2,22 +2,27 @@
 import { FormEvent } from "react"
 import { useState } from "react";
 import { Button } from "../ui/button"
-export default function RegisterForm() {
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
+
+export default function LoginForm() {
     const [message, setMessage] = useState('');
+    const router = useRouter();
     const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const response = await fetch('api/registrar', {
-            method: 'POST',
-            body: JSON.stringify({
-                email: formData.get('email'),
-                password: formData.get('password'),
-                name: formData.get('name')
-            })
-        })
-        response.json().then(res =>{
-            setMessage(res.message);
+        const response = await signIn('credentials', {
+            email: formData.get('email'),
+            password: formData.get('password'),
+            redirect: false
         });
+        if(!response?.error) {
+            router.push('/');
+            router.refresh();
+        } else {
+            setMessage("Usuário ou senha incorrretos!");
+        }
         
     }
     return( 
@@ -28,16 +33,9 @@ export default function RegisterForm() {
             </a>
         </div>
         <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-2">
-                
-            <div className="flex flex-col">
-                <label htmlFor="senha" className="mb-2 font-semibold text-gray-700">Nome:</label>
-                    <input 
-                        id="name" 
-                        name="name"
-                        type="name" 
-                        className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-400" 
-                    />
-            </div>
+            {message &&  
+                <div className="text-red-600 font-semibold">{message}</div>
+            }
             <div className="flex flex-col">
                 <label htmlFor="email" className="mb-2 font-semibold text-gray-700">Email:</label>
                     <input 
@@ -56,10 +54,7 @@ export default function RegisterForm() {
                         className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-400" 
                     />
             </div>
-            {message &&  
-                <div>{message}</div>
-            }
-            <Button className="py-2.5 bg-green-600 rounded font-semibold mt-3">Registrar!</Button>
+            <Button className="py-2.5 bg-green-600 rounded font-semibold mt-3">Login!</Button>
         </form>
     </div>)
 }
