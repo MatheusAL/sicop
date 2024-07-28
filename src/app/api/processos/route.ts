@@ -2,10 +2,23 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET() {
+export async function GET(request) {
+    const { searchParams } = new URL(request.url);
+    const produtoId = searchParams.get('produtoId');
   try {
-    const processos = await prisma.processo.findMany();
+    let processos = {};
+    if (!produtoId) {
+        processos = await prisma.processo.findMany();
+        return Response.json({ data: processos });
+    }
+
+    processos =  await prisma.processo.findMany({
+        where: {
+            produtoId: parseInt(produtoId),
+        }
+    });
     return Response.json({ data: processos });
+    
   } catch (error) {
     console.error('Error fetching maquinas:', error);
     return new Response('Internal Server Error', { status: 500 });
@@ -20,8 +33,8 @@ export async function POST(request: Request) {
           data: {
             referencia: data.referencia,
             descricao: data.descricao,
-            maquinaId: data.maquinaId,
-            produtoId: data.produtoId,
+            maquinaId: parseInt(data.maquinaId),
+            produtoId: parseInt(data.produtoId),
             tempo: parseInt(data.tempo)
           },
         });
