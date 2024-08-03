@@ -20,7 +20,7 @@ export async function GET(request) {
     return Response.json({ data: processos });
     
   } catch (error) {
-    console.error('Error fetching maquinas:', error);
+    console.error('Error fetching processos:', error);
     return new Response('Internal Server Error', { status: 500 });
   }
 }

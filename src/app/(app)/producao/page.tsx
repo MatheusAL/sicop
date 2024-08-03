@@ -1,4 +1,4 @@
-import ProductionActions from '@/components/ProductionActions';
+/* import ProductionActions from '@/components/ProductionActions';
 
 import {
     Table,
@@ -94,5 +94,21 @@ export default function Producao() {
                 </div>
             </section>
         </main>)
+}
+  
+ */
+
+import Production from '@/components/Production';
+import { HydrationBoundary, dehydrate, QueryClient } from '@tanstack/react-query';
+export default function Producao() {
+    
+    const queryClient = new QueryClient();
+    return (
+        <main className="min-h-screen p-6">
+            <HydrationBoundary state={dehydrate(queryClient)}>
+                <Production />
+            </HydrationBoundary>
+        </main>
+    );
 }
   
