@@ -149,6 +149,9 @@ export default function CreateProcessForm() {
                     />
                 </div>
             </div>
+            {mutation.isPending && <p>Adicionando...</p>}
+            {mutation.isError && <p>Error: {mutation.error.message}</p>}
+            {mutation.isSuccess && <p>Processo adicionado com sucesso!</p>}
             <div className="flex space-x-4">
                 <Button type="submit" className="flex-1 py-3 bg-green-400 text-white font-semibold rounded hover:bg-green-500 transition duration-300">Criar</Button>
                 <Button type="reset" className="flex-1 py-3 bg-red-400 text-white font-semibold rounded hover:bg-red-500 transition duration-300">Limpar</Button>
