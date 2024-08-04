@@ -46,7 +46,7 @@ export default async function RootLayout({
         <Provider >
           <body className={`${inter.className} flex bg-gray-100`}>
             <Sidebar />
-            <div className="flex flex-col flex-1">
+            <div className="flex flex-col flex-1 max-width">
               <main >
                 {children}
               </main>

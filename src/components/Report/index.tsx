@@ -26,7 +26,7 @@ export default function Report() {
             <h1 className="text-4xl"> Relatório de produtividade </h1>
             <section className="pt-4 px-2">
                 
-                {data && <CustomTable data={transformedEfficiencyData} headers={headers} tableDescription={'Lista dos produtos da empresa.'}/>}
+                {data && <CustomTable data={transformedEfficiencyData} headers={headers} tableDescription={'Lista de produtividade.'}/>}
             </section>
         </>
     )
