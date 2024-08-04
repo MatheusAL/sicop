@@ -1,6 +1,7 @@
 'use client'
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import CustomTable from '@/components/Table';
+import ReportActions from '../ReportActions';
 export default function Report() {
 
     const getReport = async () => {
@@ -25,7 +26,7 @@ export default function Report() {
         <>
             <h1 className="text-4xl"> Relatório de produtividade </h1>
             <section className="pt-4 px-2">
-                
+                <ReportActions />
                 {data && <CustomTable data={transformedEfficiencyData} headers={headers} tableDescription={'Lista de produtividade.'}/>}
             </section>
         </>
