@@ -39,6 +39,11 @@ export default function CreateProcessForm() {
     const mutation = useMutation({mutationFn: addProcess,
         onSuccess: () => {
             queryClient.invalidateQueries(['processos']);
+            setReferencia('');
+            setDescricao('');
+            setMaquina('');
+            setProduto('');
+            setTempo('');
         },
     });
     const handleSubmit = async (e) => {

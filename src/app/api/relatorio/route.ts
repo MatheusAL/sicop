@@ -1,11 +1,14 @@
 import { PrismaClient } from '@prisma/client';
+import { auth } from '@/app/services/auth';
 
 const prisma = new PrismaClient();
 
-export async function GET(request) {
-  try {
-    
+export async function GET() {
+    const session = await auth();
+    try {
+    const userId = session?.user.id;
     const productionData = await prisma.producao.findMany({
+        where: { userId },
         include: {
             colaborador: {
                 select: {

@@ -24,6 +24,14 @@ model User {
   password      String
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+  colaboradores Colaborador[]
+  produtos      Produto[]
+  processos     Processo[]
+  producoes     Producao[]
+  maquinas      Maquina[]
+
+  subscriptionId Int  @default(1)
+  subscription  Subscription    @relation(fields: [subscriptionId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -88,6 +96,8 @@ model Colaborador {
   id              Int        @id @default(autoincrement())
   nome            String
   tempoDisponivel Int
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
   Producoes       Producao[]
 }
 
@@ -95,6 +105,8 @@ model Maquina {
   id        Int        @id @default(autoincrement())
   nome      String
   descricao String
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
   Processos Processo[]
 }
 
@@ -102,6 +114,8 @@ model Produto {
   id        Int        @id @default(autoincrement())
   nome      String
   descricao String
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
   Producoes Producao[]
   Processo  Processo[]
 }
@@ -113,6 +127,8 @@ model Processo {
   descricao  String
   tempo      Int
   produtoId  Int
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
   maquina    Maquina    @relation(fields: [maquinaId], references: [id])
   produto    Produto    @relation(fields: [produtoId], references: [id])
   Producoes  Producao[]
@@ -125,7 +141,15 @@ model Producao {
   processoId    Int
   data          DateTime
   tempo         Int
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
   colaborador   Colaborador @relation(fields: [colaboradorId], references: [id])
   produto       Produto     @relation(fields: [produtoId], references: [id])
   processo      Processo    @relation(fields: [processoId], references: [id])
+}
+
+model Subscription {
+  id    Int     @id @default(autoincrement())
+  type  String
+  users User[]
 }

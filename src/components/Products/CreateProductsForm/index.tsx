@@ -6,12 +6,10 @@ import { Button } from "@/components/ui/button";
 export interface Produto{
     nome: string,
     descricao: string,
-    referencia: string
 }
 export default function CreateProductForm() {
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [referencia, setReferencia] = useState('');
     const queryClient = useQueryClient();
 
     const addProduto = async (newColaborador: Produto) => {
@@ -33,27 +31,19 @@ export default function CreateProductForm() {
     const mutation = useMutation({mutationFn: addProduto,
         onSuccess: () => {
             queryClient.invalidateQueries(['produtos']);
+            setNome('');
+            setDescricao('');
         },
     });
     const handleSubmit = async (e) => {
         e.preventDefault();
-        mutation.mutate({ nome, referencia, descricao});
+        mutation.mutate({ nome, descricao});
       };
     
     return (
     <form onSubmit={handleSubmit} className="flex flex-col  min-h-screen space-y-4 p-6 bg-white rounded-lg shadow-md">
         <div className="flex-1 space-y-4">
             <h1 className="text-2xl font-bold my-6">Criar Novo Produto</h1>
-                <div className="flex flex-col">
-                    <label htmlFor="tempo" className="mb-2 font-medium text-gray-700">Referência:</label>
-                    <input 
-                        id="referencia" 
-                        name="referencia" 
-                        className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-400" 
-                        value={referencia}
-                        onChange={(e) => setReferencia(e.target.value)}
-                    />
-                </div>
                 <div className="flex flex-col">
                     <label htmlFor="name" className="mb-2 font-medium text-gray-700">Nome:</label>
                     <input 

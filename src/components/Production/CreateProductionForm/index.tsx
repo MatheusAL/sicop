@@ -39,6 +39,11 @@ export default function CreateProductionForm() {
     const mutation = useMutation({mutationFn: addProducao,
         onSuccess: () => {
             queryClient.invalidateQueries(['producao']);
+            setTempo('');
+            setDataProducao('');
+            setColaborator('')
+            setProduto('');
+            setProcesso('');
         },
     });
     const handleSubmit = async (e) => {

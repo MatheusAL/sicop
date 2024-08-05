@@ -31,6 +31,8 @@ export default function CreateColaboratorForm() {
     const mutation = useMutation({mutationFn: addColaborador,
         onSuccess: () => {
             queryClient.invalidateQueries(['colaboradores']);
+            setNome('');
+            setTempo('');
         },
     });
     const handleSubmit = async (e) => {

@@ -32,6 +32,8 @@ export default function CreateMachineForm() {
     const mutation = useMutation({mutationFn: addMaquina,
         onSuccess: () => {
             queryClient.invalidateQueries(['maquinas']);
+            setNome('');
+            setDescricao('');
         },
     });
     const handleSubmit = async (e) => {

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "../ui/button"
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 export default function LoginForm() {
@@ -55,6 +56,7 @@ export default function LoginForm() {
                     />
             </div>
             <Button className="py-2.5 bg-green-600 rounded font-semibold mt-3">Login!</Button>
+            <span>Não possui uma conta ainda? <Link className="text-blue-800" href={"/registrar"}>Criar conta!</Link></span>
         </form>
     </div>)
 }
