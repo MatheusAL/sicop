@@ -2,8 +2,12 @@
 import { FormEvent } from "react"
 import { useState } from "react";
 import { Button } from "../ui/button"
+import { useRouter } from 'next/navigation'
+
 export default function RegisterForm() {
     const [message, setMessage] = useState('');
+    const router = useRouter();
+
     const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -17,6 +21,7 @@ export default function RegisterForm() {
         })
         response.json().then(res =>{
             setMessage(res.message);
+            router.push('/login');
         });
         
     }
